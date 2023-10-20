@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Stock App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React/TS web-app that retrieves up-to-date stock data from the Dow 30 from a Alpha Vintage API and then displays a stock portfolio diversity calculator. 
 
 ## Available Scripts
 
