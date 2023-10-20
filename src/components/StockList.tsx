@@ -41,7 +41,9 @@ const StockList = () => {
   const basePath = "https://finnhub.io/api/v1";
 
   //stock data
-  const [stocks, setStocks] = useState<{ ticker: string; value: number }[]>([]);
+  const [stocks, setStocks] = useState<
+    { ticker: string; value: number; name: string }[]
+  >([]);
 
   //fetching from the api and then storing the stock data
   const fetchData = async () => {
@@ -54,7 +56,15 @@ const StockList = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        return { ticker, value: data.c };
+        const nameResponse = await fetch(
+          `${basePath}/stock/profile2?symbol=${ticker}&token=${key}`
+        );
+        if (!nameResponse.ok) {
+          throw new Error(`HTTP error! status: ${nameResponse.status}`);
+        }
+        const nameData = await nameResponse.json();
+
+        return { ticker, value: data.c, name: nameData.name };
       });
       const results = await Promise.all(promises);
       setStocks(results);

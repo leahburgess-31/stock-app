@@ -12,6 +12,7 @@ import {
 interface Stock {
   ticker: string;
   value: number;
+  name: string;
 }
 
 const AllStocks = ({ stocks }: { stocks: Stock[] }) => {
@@ -39,7 +40,7 @@ const AllStocks = ({ stocks }: { stocks: Stock[] }) => {
                   <Typography variant="h6" style={{ fontWeight: "bold" }}>
                     {stock.ticker}
                   </Typography>
-                  <Typography variant="body2">Value: {stock.value}</Typography>
+                  <Typography variant="body2">{stock.name}</Typography>
                 </CardContent>
               </Card>
             </Grid>
