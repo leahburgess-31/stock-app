@@ -17,10 +17,10 @@ interface Stock {
 
 const AllStocks = ({ stocks }: { stocks: Stock[] }) => {
   return (
-    <Card style={{ margin: 16, borderRadius: 16 }}>
+    <Card style={{ margin: 16, borderRadius: 16, background: "#2B394E" }}>
       <CardHeader
         title={
-          <Typography variant="h5" fontWeight="bold">
+          <Typography variant="h5" fontWeight="bold" color="white">
             All Stocks
           </Typography>
         }
@@ -34,18 +34,26 @@ const AllStocks = ({ stocks }: { stocks: Stock[] }) => {
                   border: "1px solid #ccc",
                   borderRadius: 8,
                   height: "100%",
+                  background: "#34455E",
                 }}
               >
                 <CardContent>
                   <Grid container justifyContent="space-between">
                     <Grid>
-                      <Typography variant="h6" style={{ fontWeight: "bold" }}>
+                      <Typography
+                        variant="h6"
+                        style={{ fontWeight: "bold", color: "white" }}
+                      >
                         {stock.ticker}
                       </Typography>
-                      <Typography variant="body2">{stock.name}</Typography>
+                      <Typography variant="body2" color="white">
+                        {stock.name}
+                      </Typography>
                     </Grid>
                     <Grid>
-                      <Typography variant="body2">{stock.value}</Typography>
+                      <Typography variant="body2" color="white">
+                        {stock.value}
+                      </Typography>
                     </Grid>
                   </Grid>
                 </CardContent>
