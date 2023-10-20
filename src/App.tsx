@@ -1,5 +1,5 @@
 import React from "react";
-import StockList from "./StockList";
+import StockList from "./components/StockList";
 function App() {
   return (
     <div className="App">

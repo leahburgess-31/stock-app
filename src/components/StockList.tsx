@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import AllStocks from "./AllStocks";
 
 const StockList = () => {
+  //list of Dow 30
   const dowTickers = [
     "AXP",
     "AMGN",
@@ -34,11 +36,14 @@ const StockList = () => {
     "DOW",
   ];
 
+  //api variables
   const key = "ckp2nk9r01qlsp909ojgckp2nk9r01qlsp909ok0";
   const basePath = "https://finnhub.io/api/v1";
 
+  //stock data
   const [stocks, setStocks] = useState<{ ticker: string; value: number }[]>([]);
 
+  //fetching from the api and then storing the stock data
   const fetchData = async () => {
     try {
       const promises = dowTickers.map(async (ticker) => {
@@ -63,15 +68,16 @@ const StockList = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Stock Data</h1>
-      <ul>
-        {stocks.map((result, index) => (
-          <li key={index}>
-            Ticker: {result.ticker}, Value: {result.value}
-          </li>
-        ))}
-      </ul>
+    <div
+      style={{
+        background: "rgb(28,37,54)",
+        minHeight: "100vh",
+        overflow: "hidden",
+        color: "#ffffff",
+      }}
+    >
+      <h1 style={{ margin: 16 }}>Dashboard</h1>
+      <AllStocks stocks={stocks}></AllStocks>
     </div>
   );
 };
