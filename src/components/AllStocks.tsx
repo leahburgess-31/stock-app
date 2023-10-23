@@ -24,6 +24,7 @@ const AllStocks = ({
   onDragStart: (event: React.DragEvent<HTMLDivElement>, stock: Stock) => void;
   removeStockFromAllStocks: (ticker: string) => void;
 }) => {
+  const sortedStocks = [...stocks].sort((a, b) => a.name.localeCompare(b.name));
   return (
     <Card style={{ margin: 16, borderRadius: 16, background: "#2B394E" }}>
       <CardHeader
@@ -35,7 +36,7 @@ const AllStocks = ({
       />
       <Box style={{ margin: 16 }}>
         <Grid container spacing={2}>
-          {stocks.map((stock) => (
+          {sortedStocks.map((stock) => (
             <Grid item key={stock.ticker} xs={12} sm={6} md={4} lg={3}>
               <Card
                 style={{

@@ -1,6 +1,6 @@
 // CustomStockContainer.jsx
 
-import React, { useState } from "react";
+import React, { useRef, useState, forwardRef } from "react";
 import {
   Box,
   Card,
@@ -18,17 +18,37 @@ const SelectedStocks = ({
   onDragOver,
   onDrop,
   removeStock,
+  addStockToAllStocks,
 }: {
   selectedStocks: { ticker: string; value: number; name: string }[];
   onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
   onDrop: (event: React.DragEvent<HTMLDivElement>) => void;
   removeStock: (ticker: string) => void;
+  addStockToAllStocks: (stock: {
+    ticker: string;
+    value: number;
+    name: string;
+  }) => void;
 }) => {
+  const handleRemoveStock = (stock: {
+    ticker: string;
+    value: number;
+    name: string;
+  }) => {
+    removeStock(stock.ticker);
+    addStockToAllStocks(stock);
+  };
+
+  const sortedSelectedStocks = [...selectedStocks].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
   return (
     <div style={{ width: "50%" }}>
       <Card
         onDragOver={onDragOver}
         onDrop={onDrop}
+        className="selected-stocks"
         style={{ margin: 16, borderRadius: 16, background: "#2B394E" }}
       >
         <CardHeader
@@ -40,7 +60,7 @@ const SelectedStocks = ({
         />
         <Box style={{ margin: 16 }}>
           <Grid container spacing={2}>
-            {selectedStocks.map((stock) => (
+            {sortedSelectedStocks.map((stock) => (
               <Grid item xs={12} sm={6} md={4} lg={3}>
                 <Card
                   style={{
@@ -51,7 +71,7 @@ const SelectedStocks = ({
                   }}
                 >
                   <IconButton
-                    onClick={() => removeStock(stock.ticker)}
+                    onClick={() => handleRemoveStock(stock)}
                     style={{
                       color: "white",
                       paddingLeft: 12,

@@ -113,6 +113,15 @@ const StockList = () => {
     );
   };
 
+  //Function to handle addition of a stock to all stocks
+  const addStockToAllStocks = (stock: {
+    ticker: string;
+    value: number;
+    name: string;
+  }) => {
+    setStocks([...stocks, stock]);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -132,6 +141,7 @@ const StockList = () => {
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         removeStock={removeStock}
+        addStockToAllStocks={addStockToAllStocks}
       ></SelectedStocks>
       <AllStocks
         stocks={stocks}
