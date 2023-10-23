@@ -15,7 +15,15 @@ interface Stock {
   name: string;
 }
 
-const AllStocks = ({ stocks }: { stocks: Stock[] }) => {
+const AllStocks = ({
+  stocks,
+  onDragStart,
+  removeStockFromAllStocks,
+}: {
+  stocks: Stock[];
+  onDragStart: (event: React.DragEvent<HTMLDivElement>, stock: Stock) => void;
+  removeStockFromAllStocks: (ticker: string) => void;
+}) => {
   return (
     <Card style={{ margin: 16, borderRadius: 16, background: "#2B394E" }}>
       <CardHeader
@@ -36,6 +44,9 @@ const AllStocks = ({ stocks }: { stocks: Stock[] }) => {
                   height: "100%",
                   background: "#34455E",
                 }}
+                draggable={true}
+                onDragStart={(event) => onDragStart(event, stock)}
+                onDragEnd={() => removeStockFromAllStocks(stock.ticker)}
               >
                 <CardContent>
                   <Grid container justifyContent="space-between">

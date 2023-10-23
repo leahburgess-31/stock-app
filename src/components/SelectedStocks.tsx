@@ -1,6 +1,6 @@
 // CustomStockContainer.jsx
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Card,
@@ -8,12 +8,29 @@ import {
   CardContent,
   Grid,
   Typography,
+  IconButton,
 } from "@mui/material";
 
-const SelectedStocks = () => {
+import MinimizeIcon from "@material-ui/icons/Minimize";
+
+const SelectedStocks = ({
+  selectedStocks,
+  onDragOver,
+  onDrop,
+  removeStock,
+}: {
+  selectedStocks: { ticker: string; value: number; name: string }[];
+  onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
+  onDrop: (event: React.DragEvent<HTMLDivElement>) => void;
+  removeStock: (ticker: string) => void;
+}) => {
   return (
     <div style={{ width: "50%" }}>
-      <Card style={{ margin: 16, borderRadius: 16, background: "#2B394E" }}>
+      <Card
+        onDragOver={onDragOver}
+        onDrop={onDrop}
+        style={{ margin: 16, borderRadius: 16, background: "#2B394E" }}
+      >
         <CardHeader
           title={
             <Typography variant="h5" fontWeight="bold" color="white">
@@ -23,11 +40,56 @@ const SelectedStocks = () => {
         />
         <Box style={{ margin: 16 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={4} lg={3}></Grid>
+            {selectedStocks.map((stock) => (
+              <Grid item xs={12} sm={6} md={4} lg={3}>
+                <Card
+                  style={{
+                    border: "1px solid #ccc",
+                    borderRadius: 8,
+                    height: "100%",
+                    background: "#34455E",
+                  }}
+                >
+                  <IconButton
+                    onClick={() => removeStock(stock.ticker)}
+                    style={{
+                      color: "white",
+                      paddingLeft: 12,
+                    }}
+                  >
+                    <MinimizeIcon />
+                  </IconButton>
+                  <CardContent>
+                    <Grid container justifyContent="space-between">
+                      <Grid item container justifyContent="space-between">
+                        <Typography
+                          variant="h6"
+                          style={{ fontWeight: "bold", color: "white" }}
+                        >
+                          {stock.ticker}
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography variant="body2" color="white">
+                          {stock.value}
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography variant="body2" color="white">
+                          {stock.name}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
-          <Typography variant="body1" align="center" color="white">
-            Drag and drop stocks to select stocks to add to your portfolio
-          </Typography>
+          {selectedStocks.length === 0 && (
+            <Typography variant="body1" align="center" color="white">
+              Drag and drop stocks to select stocks to add to your portfolio
+            </Typography>
+          )}
         </Box>
       </Card>
     </div>

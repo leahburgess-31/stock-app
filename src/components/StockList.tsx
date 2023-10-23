@@ -74,6 +74,45 @@ const StockList = () => {
     }
   };
 
+  const [selectedStocks, setSelectedStocks] = useState<
+    { ticker: string; value: number; name: string }[]
+  >([]);
+
+  // Function to handle dragging stock
+  const handleDragStart = (
+    event: React.DragEvent<HTMLDivElement>,
+    stock: { ticker: string; value: number; name: string }
+  ) => {
+    event.dataTransfer.setData("text/plain", JSON.stringify(stock));
+  };
+
+  // Function to handle dropping stock
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text/plain");
+    const draggedStock = JSON.parse(data);
+    setSelectedStocks([...selectedStocks, draggedStock]);
+  };
+
+  // Prevent default behavior for the drop target
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
+  //Function to handle removal of a stock from selected stocks
+  const removeStock = (ticker: string) => {
+    setSelectedStocks((prevSelectedStocks) =>
+      prevSelectedStocks.filter((stock) => stock.ticker !== ticker)
+    );
+  };
+
+  //Function to handle removal of a stock from all stocks
+  const removeStockFromAllStocks = (ticker: string) => {
+    setStocks((prevStocks) =>
+      prevStocks.filter((stock) => stock.ticker !== ticker)
+    );
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -88,8 +127,17 @@ const StockList = () => {
       }}
     >
       <h1 style={{ margin: 16 }}>Dashboard</h1>
-      <SelectedStocks></SelectedStocks>
-      <AllStocks stocks={stocks}></AllStocks>
+      <SelectedStocks
+        selectedStocks={selectedStocks}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        removeStock={removeStock}
+      ></SelectedStocks>
+      <AllStocks
+        stocks={stocks}
+        onDragStart={handleDragStart}
+        removeStockFromAllStocks={removeStockFromAllStocks}
+      />
     </div>
   );
 };
