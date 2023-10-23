@@ -39,7 +39,7 @@ const AllStocks = ({ stocks }: { stocks: Stock[] }) => {
               >
                 <CardContent>
                   <Grid container justifyContent="space-between">
-                    <Grid>
+                    <Grid item container justifyContent="space-between">
                       <Typography
                         variant="h6"
                         style={{ fontWeight: "bold", color: "white" }}
@@ -47,12 +47,12 @@ const AllStocks = ({ stocks }: { stocks: Stock[] }) => {
                         {stock.ticker}
                       </Typography>
                       <Typography variant="body2" color="white">
-                        {stock.name}
+                        {stock.value}
                       </Typography>
                     </Grid>
-                    <Grid>
+                    <Grid item>
                       <Typography variant="body2" color="white">
-                        {stock.value}
+                        {stock.name}
                       </Typography>
                     </Grid>
                   </Grid>
