@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AllStocks from "./AllStocks";
+import SelectedStocks from "./SelectedStocks";
 
 const StockList = () => {
   //list of Dow 30
@@ -87,6 +88,7 @@ const StockList = () => {
       }}
     >
       <h1 style={{ margin: 16 }}>Dashboard</h1>
+      <SelectedStocks></SelectedStocks>
       <AllStocks stocks={stocks}></AllStocks>
     </div>
   );
