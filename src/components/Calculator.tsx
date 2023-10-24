@@ -81,7 +81,7 @@ const Calculator = ({
         />
         <CardContent>
           <Typography variant="h6" color="white">
-            Diversity Score: {totalValue.toFixed(2)}
+            Portfolio Total: {totalValue.toFixed(2)}
           </Typography>
           <div style={{ marginTop: 10 }}>
             <Typography variant="h6" color="white">
