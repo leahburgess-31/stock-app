@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import AllStocks from "./AllStocks";
 import SelectedStocks from "./SelectedStocks";
+import { Grid } from "@mui/material";
+import Calculator from "./Calculator";
 
 const StockList = () => {
   //list of Dow 30
@@ -168,13 +170,16 @@ const StockList = () => {
       }}
     >
       <h1 style={{ margin: 16 }}>Dashboard</h1>
-      <SelectedStocks
-        selectedStocks={selectedStocks}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        removeStock={removeStock}
-        addStockToAllStocks={addStockToAllStocks}
-      ></SelectedStocks>
+      <Grid item container justifyContent="space-between">
+        <SelectedStocks
+          selectedStocks={selectedStocks}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+          removeStock={removeStock}
+          addStockToAllStocks={addStockToAllStocks}
+        ></SelectedStocks>
+        <Calculator></Calculator>
+      </Grid>
       <AllStocks
         stocks={stocks}
         onDragStart={handleDragStart}
