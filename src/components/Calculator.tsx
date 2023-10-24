@@ -1,4 +1,3 @@
-import React, { useRef, useState, forwardRef } from "react";
 import {
   Box,
   Card,
@@ -6,10 +5,7 @@ import {
   CardContent,
   Grid,
   Typography,
-  IconButton,
 } from "@mui/material";
-
-import MinimizeIcon from "@material-ui/icons/Minimize";
 
 const Calculator = ({
   selectedStocks,
@@ -21,11 +17,13 @@ const Calculator = ({
     sector: string;
   }[];
 }) => {
+  //get total value of portfolio
   const totalValue = selectedStocks.reduce(
     (acc, stock) => acc + stock.value,
     0
   );
 
+  //calculate weight of each sector in portfolio
   const calculateSectorWeights = () => {
     const sectorWeights: Record<string, number> = {};
 
@@ -46,6 +44,7 @@ const Calculator = ({
 
   const sectorWeights = calculateSectorWeights();
 
+  //calculate portfolio diversity
   const calculateSquaredWeights = () => {
     const squaredWeights: Record<string, number> = {};
 

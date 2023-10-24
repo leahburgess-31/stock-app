@@ -1,4 +1,4 @@
-import React, { useRef, useState, forwardRef } from "react";
+import React from "react";
 import {
   Box,
   Card,
@@ -44,6 +44,7 @@ const SelectedStocks = ({
     addStockToAllStocks(stock);
   };
 
+  //sort stocks by alphabetical order
   const sortedSelectedStocks = [...selectedStocks].sort((a, b) =>
     a.ticker.localeCompare(b.ticker)
   );

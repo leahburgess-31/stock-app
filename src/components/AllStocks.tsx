@@ -25,6 +25,7 @@ const AllStocks = ({
   onDragStart: (event: React.DragEvent<HTMLDivElement>, stock: Stock) => void;
   removeStockFromAllStocks: (ticker: string) => void;
 }) => {
+  //sort stocks in alphabetical order
   const sortedStocks = [...stocks].sort((a, b) =>
     a.ticker.localeCompare(b.ticker)
   );
