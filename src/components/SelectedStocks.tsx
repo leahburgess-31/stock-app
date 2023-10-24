@@ -20,7 +20,12 @@ const SelectedStocks = ({
   removeStock,
   addStockToAllStocks,
 }: {
-  selectedStocks: { ticker: string; value: number; name: string }[];
+  selectedStocks: {
+    ticker: string;
+    value: number;
+    name: string;
+    sector: string;
+  }[];
   onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
   onDrop: (event: React.DragEvent<HTMLDivElement>) => void;
   removeStock: (ticker: string) => void;
@@ -28,12 +33,14 @@ const SelectedStocks = ({
     ticker: string;
     value: number;
     name: string;
+    sector: string;
   }) => void;
 }) => {
   const handleRemoveStock = (stock: {
     ticker: string;
     value: number;
     name: string;
+    sector: string;
   }) => {
     removeStock(stock.ticker);
     addStockToAllStocks(stock);
@@ -88,8 +95,6 @@ const SelectedStocks = ({
                         >
                           {stock.ticker}
                         </Typography>
-                      </Grid>
-                      <Grid item>
                         <Typography variant="body2" color="white">
                           {stock.value}
                         </Typography>
@@ -97,6 +102,9 @@ const SelectedStocks = ({
                       <Grid item>
                         <Typography variant="body2" color="white">
                           {stock.name}
+                        </Typography>
+                        <Typography variant="body2" color="white">
+                          {stock.sector}
                         </Typography>
                       </Grid>
                     </Grid>

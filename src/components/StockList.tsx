@@ -43,7 +43,7 @@ const StockList = () => {
 
   //stock data
   const [stocks, setStocks] = useState<
-    { ticker: string; value: number; name: string }[]
+    { ticker: string; value: number; name: string; sector: string }[]
   >([]);
 
   //fetching from the api and then storing the stock data
@@ -65,7 +65,38 @@ const StockList = () => {
         }
         const nameData = await nameResponse.json();
 
-        return { ticker, value: data.c, name: nameData.name };
+        const sectorMappings: Record<string, string> = {
+          Technology: "Information Technology",
+          Semiconductors: "Information Technology",
+          Communications: "Information Technology",
+          Pharmaceuticals: "Health Care",
+          Healthcare: "Health Care",
+          Biotechnology: "Health Care",
+          "Financial Services": "Financials",
+          Insurance: "Financials",
+          Banking: "Financials",
+          Machinery: "Industrials",
+          "Aerospace & Defense": "Industrials",
+          "Industrial Conglomerates": "Industrials",
+          Retail: "Consumer Discretionary",
+          "Hotels, Restaurants & Leisure": "Consumer Discretionary",
+          "Textiles, Apparel & Luxury Goods": "Consumer Discretionary",
+          Chemicals: "Materials",
+          "Consumer products": "Consumer Staples",
+          Beverages: "Consumer Staples",
+          Media: "Communication Services",
+          Telecommunication: "Communication Services",
+        };
+
+        const sector =
+          sectorMappings[nameData.finnhubIndustry] || nameData.finnhubIndustry;
+
+        return {
+          ticker,
+          value: data.c,
+          name: nameData.name,
+          sector: sector,
+        };
       });
       const results = await Promise.all(promises);
       setStocks(results);
@@ -75,13 +106,13 @@ const StockList = () => {
   };
 
   const [selectedStocks, setSelectedStocks] = useState<
-    { ticker: string; value: number; name: string }[]
+    { ticker: string; value: number; name: string; sector: string }[]
   >([]);
 
   // Function to handle dragging stock
   const handleDragStart = (
     event: React.DragEvent<HTMLDivElement>,
-    stock: { ticker: string; value: number; name: string }
+    stock: { ticker: string; value: number; name: string; sector: string }
   ) => {
     event.dataTransfer.setData("text/plain", JSON.stringify(stock));
   };
@@ -118,6 +149,7 @@ const StockList = () => {
     ticker: string;
     value: number;
     name: string;
+    sector: string;
   }) => {
     setStocks([...stocks, stock]);
   };

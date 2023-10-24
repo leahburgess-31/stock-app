@@ -13,6 +13,7 @@ interface Stock {
   ticker: string;
   value: number;
   name: string;
+  sector: string;
 }
 
 const AllStocks = ({
@@ -67,6 +68,9 @@ const AllStocks = ({
                     <Grid item>
                       <Typography variant="body2" color="white">
                         {stock.name}
+                      </Typography>
+                      <Typography variant="body2" color="white">
+                        {stock.sector}
                       </Typography>
                     </Grid>
                   </Grid>
