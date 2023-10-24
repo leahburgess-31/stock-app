@@ -40,7 +40,7 @@ const SelectedStocks = ({
   };
 
   const sortedSelectedStocks = [...selectedStocks].sort((a, b) =>
-    a.name.localeCompare(b.name)
+    a.ticker.localeCompare(b.ticker)
   );
 
   return (

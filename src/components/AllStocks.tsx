@@ -24,7 +24,9 @@ const AllStocks = ({
   onDragStart: (event: React.DragEvent<HTMLDivElement>, stock: Stock) => void;
   removeStockFromAllStocks: (ticker: string) => void;
 }) => {
-  const sortedStocks = [...stocks].sort((a, b) => a.name.localeCompare(b.name));
+  const sortedStocks = [...stocks].sort((a, b) =>
+    a.ticker.localeCompare(b.ticker)
+  );
   return (
     <Card style={{ margin: 16, borderRadius: 16, background: "#2B394E" }}>
       <CardHeader
