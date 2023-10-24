@@ -1,5 +1,3 @@
-// CustomStockContainer.jsx
-
 import React, { useRef, useState, forwardRef } from "react";
 import {
   Box,

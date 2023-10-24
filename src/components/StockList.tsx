@@ -178,7 +178,7 @@ const StockList = () => {
           removeStock={removeStock}
           addStockToAllStocks={addStockToAllStocks}
         ></SelectedStocks>
-        <Calculator></Calculator>
+        <Calculator selectedStocks={selectedStocks}></Calculator>
       </Grid>
       <AllStocks
         stocks={stocks}
